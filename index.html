@@ -1,318 +1,293 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Be My Valentine 💘</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
-  body, html { width: 100%; height: 100%; overflow: hidden; }
-  body {
-    background: linear-gradient(135deg, #ffe3ec, #ffd6e0, #fbd4d4);
-    color: #d14c73;
-    position: relative;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎂✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-blue: #0f172a;
+            --neon-blue: #38bdf8;
+            --soft-blue: #7dd3fc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-  /* Decorative floating hearts */
-  .floating-heart {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: #ff6b8a;
-    transform: rotate(-45deg);
-    border-radius: 50% 50% 0 0;
-    animation: float 10s infinite ease-in-out;
-    opacity: 0.7;
-  }
-  .floating-heart::before,
-  .floating-heart::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: #ff6b8a;
-    border-radius: 50%;
-  }
-  .floating-heart::before { top: -9px; left: 0; }
-  .floating-heart::after { left: 9px; top: 0; }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-  @keyframes float {
-    0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateY(-20vh) rotate(-45deg); opacity: 0; }
-  }
+        body {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
 
-  /* Sections */
-  .section {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
-  .active { opacity: 1; pointer-events: auto; }
+        /* Latar Belakang Bintang */
+        #stars-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-  h1 { font-size: 3em; margin-bottom: 1rem; }
-  h2 { font-size: 2em; margin-bottom: 0.8rem; }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
 
-  .buttons { display: flex; gap: 20px; margin-top: 1rem; position: relative; }
-  button {
-    padding: 14px 30px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: all 0.3s ease;
-  }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
 
-  .yes {
-    background: #ff4d6d;
-    color: white;
-    font-size: 1.3em;
-    box-shadow: 0 8px 20px rgba(255,77,109,0.4);
-  }
-  .yes:hover {
-    transform: scale(1.08);
-    background: #ff2e55;
-  }
+        /* Container Card */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            z-index: 10;
+            position: relative;
+        }
 
-  .no {
-    background: #fff;
-    color: #d14c73;
-    border: 2px solid #ff90a8;
-    position: relative;
-  }
-  .no.shrink { transform: scale(0.7); }
+        .screen { display: none; }
+        .active { display: block; animation: fadeIn 0.8s ease; }
 
-  /* Questions */
-  .question-box {
-    background: #fff7fa;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(255, 100, 120, 0.25);
-    min-width: 300px;
-  }
-  .question { display: none; flex-direction: column; gap: 12px; }
-  .question.active { display: flex; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-  input, select {
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 12px;
-    border: 1px solid #ffb7c5;
-    outline: none;
-  }
-  #nextBtn {
-    margin-top: 15px;
-    background: #ff6b8a;
-    color: white;
-  }
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 3rem; 
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
 
-  /* Summary */
-  .summary-box {
-    background: #fff0f5;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(255, 100, 120, 0.25);
-    max-width: 500px;
-  }
+        p { font-size: 1rem; margin-bottom: 30px; line-height: 1.6; opacity: 0.9; }
 
-  /* Confetti hearts */
-  .confetti {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background: #ff5d8f;
-    transform: rotate(-45deg);
-    border-radius: 50% 50% 0 0;
-    animation: fall 4s ease-in-out forwards;
-  }
-  .confetti::before,
-  .confetti::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background: #ff5d8f;
-    border-radius: 50%;
-  }
-  .confetti::before { top: -7px; left: 0; }
-  .confetti::after { left: 7px; top: 0; }
+        /* Tombol */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            height: 60px;
+            position: relative;
+        }
 
-  @keyframes fall {
-    0% { transform: translateY(-20px) rotate(-45deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
-  }
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-  /* Small sparkle */
-  .sparkle {
-    position: absolute;
-    background: #fff;
-    border-radius: 50%;
-    animation: twinkle 2s infinite ease-in-out;
-    opacity: 0.8;
-  }
-  @keyframes twinkle {
-    0%, 100% { transform: scale(0.4); opacity: 0.4; }
-    50% { transform: scale(1.2); opacity: 1; }
-  }
-</style>
+        .btn-main {
+            background: var(--neon-blue);
+            color: var(--deep-blue);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-main:hover { transform: scale(1.1); background: var(--soft-blue); }
+
+        #noBtn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid var(--glass-border);
+            position: absolute;
+        }
+
+        /* Input Styles */
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+            text-align: center;
+        }
+
+        input::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        /* Confetti Canvas */
+        #confetti {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Floating background hearts -->
-<script>
-  for (let i = 0; i < 20; i++) {
-    const h = document.createElement("div");
-    h.className = "floating-heart";
-    h.style.left = Math.random()*100 + "%";
-    h.style.animationDelay = Math.random()*5 + "s";
-    h.style.animationDuration = 8 + Math.random()*6 + "s";
-    document.body.appendChild(h);
-  }
+    <canvas id="confetti"></canvas>
+    <div id="stars-container"></div>
 
-  for (let i = 0; i < 25; i++) {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    s.style.width = s.style.height = (4 + Math.random()*4) + "px";
-    s.style.left = Math.random()*100 + "%";
-    s.style.top = Math.random()*100 + "%";
-    s.style.animationDelay = Math.random()*3 + "s";
-    document.body.appendChild(s);
-  }
-</script>
+    <div class="card">
+        <div id="s1" class="screen active">
+            <div style="font-size: 50px; margin-bottom: 10px;">🎁</div>
+            <h1>Happy Birthday!</h1>
+            <p>Hari ini ada orang spesial yang ulang tahun... Itu kamu kan? <br>Mau rayain bareng aku?</p>
+            <div class="btn-group">
+                <button class="btn btn-main" onclick="nextScreen(2)">MAU BANGET! 💙</button>
+                <button class="btn" id="noBtn" onmouseover="runAway()">Nggak</button>
+            </div>
+        </div>
 
-<!-- Landing -->
-<div id="landing" class="section active">
-  <h1>Will you be my Valentine? 💘</h1>
-  <div class="buttons">
-    <button id="yesBtn" class="yes">YES</button>
-    <button id="noBtn" class="no">NO</button>
-  </div>
-</div>
+        <div id="s2" class="screen">
+            <h1>Make a Wish 🌠</h1>
+            <p>Apa harapan terbesar kamu di umur baru ini?</p>
+            <input type="text" id="wishIn" placeholder="Tulis harapanmu di sini...">
+            <button class="btn btn-main" style="width: 100%;" onclick="save('wish', 3)">Lanjut</button>
+        </div>
 
-<!-- Questions -->
-<div id="questions" class="section hidden">
-  <div class="question-box">
-    <h2>✨ Date Questions ✨</h2>
+        <div id="s3" class="screen">
+            <h1>Cake Time 🎂</h1>
+            <p>Mau kue rasa apa kalau kita ngerayain bareng nanti?</p>
+            <input type="text" id="cakeIn" placeholder="Cokelat, Matcha, Strawberry?">
+            <button class="btn btn-main" style="width: 100%;" onclick="save('cake', 4)">Lanjut</button>
+        </div>
 
-    <div class="question active">
-      <label>Kapan kita jalan bareng?</label>
-      <input type="date" id="q1">
+        <div id="s4" class="screen">
+            <h1>A Special Gift 💙</h1>
+            <p>Terakhir, mau kado apa dari aku?</p>
+            <input type="text" id="giftIn" placeholder="Sebutin aja, siapa tau dikabulin...">
+            <button class="btn btn-main" style="width: 100%;" onclick="save('gift', 5); finalize()">Selesai</button>
+        </div>
+
+        <div id="s5" class="screen">
+            <h1>HBD To You! ✨</h1>
+            <div id="summary"></div>
+            <p style="margin-top: 20px; font-weight: bold;">"Aku doain semua hal baik datang ke kamu tahun ini!"</p>
+            <button class="btn btn-main" onclick="window.print()">Simpan Kenangan</button>
+        </div>
     </div>
-    <div class="question">
-      <label>Nonton film apa bareng?</label>
-      <input type="text" id="q2" placeholder="Contoh: Titanic, Spiderman...">
-    </div>
-    <div class="question">
-      <label>Liburan ke mana depan?</label>
-      <input type="text" id="q3" placeholder="Contoh: Bali, Jepang...">
-    </div>
-    <button id="nextBtn">Next ➜</button>
-  </div>
-</div>
 
-<!-- Summary -->
-<div id="summary" class="section hidden">
-  <div class="summary-box">
-    <h2>💖 Our Valentine Plan 💖</h2>
-    <p id="summaryText"></p>
-    <p style="margin-top:15px; font-style: italic;">Aku nggak salah pilih, semuanya lebih indah bareng kamu 🥰</p>
-    <button id="saveBtn">Save this memory 💾</button>
-  </div>
-</div>
+    <script>
+        const store = { wish: '', cake: '', gift: '' };
 
-<script>
-  const landing = document.getElementById("landing");
-  const questions = document.getElementById("questions");
-  const summary = document.getElementById("summary");
+        // 1. Create Stars Background
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+                container.appendChild(star);
+            }
+        }
+        createStars();
 
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
+        // 2. Evasive No Button
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.zIndex = '1000';
+        }
 
-  // NO button teleport
-  function moveNo() {
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-    noBtn.classList.add("shrink");
-    setTimeout(()=> noBtn.classList.remove("shrink"), 200);
-  }
-  noBtn.addEventListener("mouseover", moveNo);
+        // 3. Navigation
+        function nextScreen(n) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('s' + n).classList.add('active');
+            if(n === 2) startConfetti();
+        }
 
-  // Move when cursor close
-  landing.addEventListener("mousemove", e => {
-    const rect = noBtn.getBoundingClientRect();
-    const dist = Math.hypot(
-      e.clientX - (rect.left + rect.width/2),
-      e.clientY - (rect.top + rect.height/2)
-    );
-    if (dist < 100) moveNo();
-  });
+        function save(key, n) {
+            const val = document.getElementById(key + 'In').value;
+            store[key] = val || "Sesuatu yang indah";
+            nextScreen(n);
+        }
 
-  // Yes click
-  yesBtn.addEventListener("click", () => {
-    landing.classList.add("hidden");
-    createConfetti();
-    setTimeout(() => {
-      landing.classList.remove("active");
-      questions.classList.remove("hidden");
-      questions.classList.add("active");
-    }, 800);
-  });
+        function finalize() {
+            const div = document.getElementById('summary');
+            div.innerHTML = `
+                <div class="summary-item"><b>Harapan:</b> ${store.wish}</div>
+                <div class="summary-item"><b>Rasa Kue:</b> ${store.cake}</div>
+                <div class="summary-item"><b>Kado:</b> ${store.gift}</div>
+            `;
+        }
 
-  // Confetti hearts
-  function createConfetti() {
-    for (let i=0; i<30; i++) {
-      const c = document.createElement("div");
-      c.className = "confetti";
-      c.style.left = Math.random()*100 + "%";
-      c.style.animationDelay = Math.random()*1 + "s";
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 5000);
-    }
-  }
+        // 4. Simple Confetti Effect
+        function startConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-  // Questions logic
-  const allQuestions = document.querySelectorAll(".question");
-  let current = 0;
-  document.getElementById("nextBtn").onclick = () => {
-    if (current < allQuestions.length - 1) {
-      allQuestions[current].classList.remove("active");
-      current++;
-      allQuestions[current].classList.add("active");
-    } else {
-      // show summary
-      const q1 = document.getElementById("q1").value || "belum ditentukan";
-      const q2 = document.getElementById("q2").value || "film romantis";
-      const q3 = document.getElementById("q3").value || "tempat impian";
+            let particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 6 + 2,
+                    d: Math.random() * 10,
+                    color: `hsl(${Math.random() * 200 + 180}, 70%, 60%)`,
+                    tilt: Math.random() * 10 - 10
+                });
+            }
 
-      document.getElementById("summaryText").innerHTML =
-        `🗓 Date: <b>${q1}</b><br>
-         🎬 Movie: <b>${q2}</b><br>
-         ✈️ Vacation: <b>${q3}</b>`;
-
-      questions.classList.add("hidden");
-      summary.classList.remove("hidden");
-      summary.classList.add("active");
-    }
-  };
-
-  // Save memory
-  document.getElementById("saveBtn").onclick = () => {
-    const text = document.getElementById("summaryText").innerText + "\nAku nggak salah pilih, semuanya lebih indah bareng kamu ❤️";
-    const blob = new Blob([text], {type: "text/plain"});
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "valentine-memory.txt";
-    link.click();
-  };
-</script>
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, i) => {
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                    ctx.stroke();
+                    
+                    p.y += Math.cos(p.d) + 1 + p.r / 2;
+                    p.tilt = Math.sin(p.d) * 15;
+                    
+                    if (p.y > canvas.height) {
+                        particles[i] = { ...p, y: -20, x: Math.random() * canvas.width };
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+    </script>
 </body>
 </html>
