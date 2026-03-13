@@ -65,13 +65,11 @@
             overflow-y: auto;
         }
 
-        /* Styling untuk FOTO SKETSA */
         .profile-img {
-            width: 150px; /* Ukuran disesuaikan agar proporsional */
-            height: auto;
-            margin: 0 auto 15px;
-            display: block;
-            object-fit: contain; /* Memastikan gambar hati tidak terpotong */
+            width: 100px; height: 100px;
+            margin: 0 auto 15px; border-radius: 50%;
+            border: 3px solid white; object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .screen { display: none; }
@@ -87,7 +85,6 @@
             background: var(--deep-flower); color: white;
             margin: 5px;
         }
-        .btn:hover { background: #0ea5e9; transform: translateY(-1px); }
         .btn-outline { background: white; border: 1px solid var(--flower-blue); color: var(--deep-flower); }
 
         textarea, input {
@@ -102,13 +99,6 @@
             max-height: 250px; overflow-y: auto;
         }
 
-        .summary-box { 
-            text-align: left; background: white; padding: 20px; 
-            border-radius: 20px; margin-top: 15px; 
-            border: 1px dashed var(--flower-blue);
-        }
-        .summary-box b { color: var(--deep-flower); }
-
         #backMauBtn { position: absolute; }
     </style>
 </head>
@@ -119,8 +109,7 @@
 
     <div class="card">
         <div id="s1" class="screen active">
-            <img src="foto-maudy.png" class="profile-img" alt="Sketsa Maudy Cintya">
-            
+            <img src="foto-maudy.jpg" class="profile-img" onerror="this.style.display='none'">
             <h1>HBD, Maudy Cintya</h1>
             <p>Hari ini seindah bunga yang mekar. <br>Mau ngerayain sebentar sama aku?</p>
             <button class="btn" onclick="next(2)">Tentu Saja 💙</button>
@@ -171,19 +160,15 @@
         </div>
 
         <div id="s8" class="screen">
-            <img src="foto-maudy.png" class="profile-img" alt="Sketsa Maudy Cintya">
-
-            <h1>For You, Maudy 🌸</h1>
-            <div id="result" class="summary-box"></div>
-            <p style="margin-top: 20px;">Apapun ceritanya, aku senang kamu berbagi denganku. Sukses selalu ya!</p>
-            <button class="btn" onclick="window.print()">Simpan Kenangan 📸</button>
+            <h1>Goodbye, Maudy 🌸</h1>
+            <p>Pilihanmu sudah tersimpan. Sukses selalu ya buat kamu.</p>
+            <button class="btn" onclick="window.print()">Simpan Kenangan</button>
         </div>
     </div>
 
     <script>
         const store = { wish: '', kondisi: '', kado: '', story: '' };
 
-        // Petal Animation
         function createPetals() {
             const container = document.getElementById('flower-field');
             for (let i = 0; i < 20; i++) {
@@ -204,7 +189,6 @@
 
         function save(key, n) {
             store[key] = document.getElementById(key + 'In').value;
-            if (n === 8) finalize();
             next(n);
         }
 
@@ -217,15 +201,6 @@
             const btn = document.getElementById('backMauBtn');
             btn.style.left = Math.random() * 80 + '%';
             btn.style.top = Math.random() * 80 + '%';
-        }
-
-        function finalize() {
-            document.getElementById('result').innerHTML = `
-                <b>Harapan:</b> ${store.wish}<br>
-                <b>Kondisi:</b> ${store.kondisi}<br>
-                <b>Suka Kado:</b> ${store.kado}<br><br>
-                <b>Cerita Maudy:</b><br><span style="font-size:13px; color:#64748b;">${store.story}</span>
-            `;
         }
     </script>
 </body>
