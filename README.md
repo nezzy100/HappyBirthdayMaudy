@@ -1,54 +1,101 @@
-# HappyBirthdayMaudy
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine? ❤️</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="particles-js"></div>
+    <title>Will You Be My Valentine? 💙</title>
+    <style>
+        /* CSS Variabel untuk Tema Biru Romantis */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #a2c2e1 0%, #d4e5ff 100%);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --accent-blue: #5d9cec;
+            --dark-blue: #4a90e2;
+            --white: #ffffff;
+        }
 
-    <div class="container">
-        <div id="screen1" class="screen active">
-            <div class="icon-header">💝</div>
-            <h1>Will you be my Valentine?</h1>
-            <p>I have a special question for you...</p>
-            <div class="btn-group">
-                <button id="yesBtn" class="btn btn-yes">YES!</button>
-                <button id="noBtn" class="btn btn-no">NO</button>
-            </div>
-        </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-        <div id="screen2" class="screen">
-            <h1>Yay! ❤️</h1>
-            <p>Kapan kita jalan bersama?</p>
-            <input type="date" id="dateInput">
-            <button class="btn btn-next" onclick="saveData('date', 3)">Lanjut ✨</button>
-        </div>
+        body {
+            background: var(--bg-gradient);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #333;
+        }
 
-        <div id="screen3" class="screen">
-            <h1>🎬 Movie Night</h1>
-            <p>Nonton film apa bareng?</p>
-            <input type="text" id="movieInput" placeholder="Judul film favoritmu...">
-            <button class="btn btn-next" onclick="saveData('movie', 4)">Lanjut ✨</button>
-        </div>
+        /* Latar Belakang Bergerak */
+        .ocean-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
 
-        <div id="screen4" class="screen">
-            <h1>✈️ Dream Trip</h1>
-            <p>Liburan ke mana nanti?</p>
-            <input type="text" id="travelInput" placeholder="Ke mana kita pergi?">
-            <button class="btn btn-next" onclick="saveData('travel', 5)">Selesai 💖</button>
-        </div>
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+            bottom: -20px;
+        }
 
-        <div id="screen5" class="screen">
-            <div class="icon-header">✨</div>
-            <h1>It's a Date!</h1>
-            <div id="summaryResult" class="summary-box"></div>
-            <p class="closing-text">"Aku nggak sabar ngelewatin semuanya bareng kamu!"</p>
-            <button class="btn btn-save" onclick="window.print()">Simpan Kenangan 📸</button>
-        </div>
-    </div>
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        }
 
-    <script src="script
+        /* Container Utama (Glassmorphism) */
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            transition: all 0.5s ease;
+        }
+
+        .screen { display: none; }
+        .active { display: block; animation: slideUp 0.6s ease-out; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 26px; color: var(--dark-blue); margin-bottom: 10px; }
+        p { font-size: 16px; margin-bottom: 25px; opacity: 0.8; }
+
+        /* Buttons */
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 60px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 1
